@@ -29,6 +29,12 @@ test('graphite.flatten', {
     assert.notStrictEqual(obj, flat);
   },
 
+  'adds a prefix to each object while flattening' : function() {
+    var obj= {foo: 'bar'};
+
+    assert.deepEqual(graphite.flatten(obj, {}, "baz.quz."), {'baz.quz.foo': 'bar'})
+  },
+
   'flattens a deep object': function() {
     var obj = {
       a: 1,
@@ -51,6 +57,29 @@ test('graphite.flatten', {
       'd'            : 4,
     });
   },
+
+  'flattens a deep object with prefix': function() {
+    var obj = {
+      a: 1,
+      deep: {
+        we: {
+          go: {
+            b: 2,
+            c: 3,
+          }
+        }
+      },
+      d: 4,
+    };
+    var flat = graphite.flatten(obj, {}, 'baz.quz.');
+
+    assert.deepEqual(flat, {
+      'baz.quz.a'            : 1,
+      'baz.quz.deep.we.go.b' : 2,
+      'baz.quz.deep.we.go.c' : 3,
+      'baz.quz.d'            : 4,
+    });
+  },
 });
 
 var client;
@@ -70,17 +99,18 @@ test('GraphiteClient', {
     assert.ok(carbon.write.calledWith({'foo.bar': 1}));
   },
 
+  '#write adds prefix to flatten metrics before passing to carbon': function() {
+    var metrics = {foo: 1, bar: 2};
+    client.write(metrics, "baz.quz.");
+
+    assert.ok(carbon.write.calledWith({'baz.quz.foo': 1, 'baz.quz.bar': 2}));
+  },
+
   '#write passes the current time to carbon': function() {
     client.write({});
 
     var now = Math.floor(Date.now() / 1000);
     assert.ok(carbon.write.getCall(0).args[1] >= now);
-  },
-
-  '#write lets you pass a timestamp to carbon': function() {
-    client.write({}, 23000);
-
-    assert.equal(carbon.write.getCall(0).args[1], 23);
   },
 
   '#write passes a callback to carbon': function() {
@@ -90,10 +120,4 @@ test('GraphiteClient', {
     assert.equal(carbon.write.getCall(0).args[2], cb);
   },
 
-  '#write takes callback as second argument as well': function() {
-    var cb = function() {};
-    client.write({}, cb);
-
-    assert.equal(carbon.write.getCall(0).args[2], cb);
-  },
 });
