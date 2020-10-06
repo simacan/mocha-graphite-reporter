@@ -2,8 +2,8 @@ var common         = require('../common');
 var test           = require('utest');
 var assert         = require('assert');
 var sinon          = require('sinon');
-var graphite       = common.graphite;
-var GraphiteClient = graphite;
+var graphite       = require('../../lib/GraphiteClient.js');
+var GraphiteClient = require('../../lib/GraphiteClient');
 
 test('graphite.createClient', {
   'returns a new GraphiteClient': function() {
