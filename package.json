@@ -10,7 +10,8 @@
   "keywords": [
     "mocha",
     "graphite",
-    "reporter"
+    "reporter",
+    "cypress"
   ],
   "license": "MIT",
   "repository": {
@@ -33,6 +34,6 @@
     "utest": "0.0.8"
   },
   "peerDependencies": {
-    "mocha": ">=2.2.5"
+    "mocha": ">=6.0.0"
   }
 }

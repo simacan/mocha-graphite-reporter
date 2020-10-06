@@ -7,7 +7,7 @@ A Graphite reporter for Mocha.
 ## Install
 
 ```
-npm install mochagraphitereporter
+npm install mocha-graphite-reporter
 ```
 
 ## Usage
