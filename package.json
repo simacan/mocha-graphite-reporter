@@ -1,5 +1,5 @@
 {
-  "name": "MochaGraphiteReporter",
+  "name": "mocha-graphite-reporter",
   "description": "A reporter sending test results through the graphite protocol to a time series database",
   "version": "0.1.0",
   "homepage": "https://github.com/simacan/mocha-graphite-reporter",
