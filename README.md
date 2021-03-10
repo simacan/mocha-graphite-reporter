@@ -30,3 +30,8 @@ To override settings of the Mocha-graphite-reporter, one can use a few environme
 ## License
 
 Licensed under the MIT license.
+
+## Publish NPMJS package
+To publish the project to the npmjs.com repository, run:
+
+```npm publish```
