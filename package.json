@@ -1,7 +1,7 @@
 {
   "name": "mocha-graphite-reporter",
   "description": "A reporter sending test results through the graphite protocol to a time series database",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/simacan/mocha-graphite-reporter",
   "author": {
     "name": "Hans Brouwer",
